@@ -34,9 +34,11 @@ class User extends CActiveRecord
 		return array(
 			array('login', 'required'),
 			array('login', 'length', 'max'=>50),
+			array('login', 'match', 'pattern'=>'^[a-zA-Z_]+$'),
 			array('phone', 'length', 'max'=>20),
 			array('first_name, last_name', 'length', 'max'=>255),
 			array('age', 'length', 'max'=>10),
+		  	array('age', 'numerical', 'integerOnly' => true, 'min' => 1, 'max' => 100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, login, phone, first_name, last_name, age', 'safe', 'on'=>'search'),
@@ -109,5 +111,26 @@ class User extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	public function getList($sort) {
+		$criteria = new CDbCriteria();
+		$criteria->order = 'id ' . $sort;
+		return User::model()->findAll($criteria);
+	}
+
+	public static function usersToArray($users)
+	{
+		$data = array();
+		/**@var User $user */
+		foreach ($users as $user) {
+			$data[] = array(
+				'id' => $user->id,
+				'login' => $user->login,
+				'age' => $user->age,
+			);
+		}
+
+		return $data;
 	}
 }
