@@ -32,4 +32,25 @@ class UserController extends RestController {
 
 		$this->renderJson(User::userToArray($user));
 	}
+
+	public function actionUpdate($id)
+	{
+		/** @var RestCHttpRequest $request */
+		$request = Yii::app()->request;
+
+		$user = User::model()->findByPk($id);
+		if (!$user) {
+			$this->sendErrors(array('User not found'));
+		}
+
+		$user->attributes = $request->getPutParams();
+		if (!$user->save()) {
+			$this->sendErrors($user->getErrors());
+		}
+
+		$user = User::model()->findByPk($user->id);
+
+		$this->renderJson(User::userToArray($user));
+
+	}
 }
