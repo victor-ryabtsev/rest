@@ -34,7 +34,7 @@ class User extends CActiveRecord
 		return array(
 			array('login', 'required'),
 			array('login', 'length', 'max'=>50),
-			array('login', 'match', 'pattern'=>'^[a-zA-Z_]+$'),
+			array('login', 'match', 'pattern'=>'/^[a-zA-Z0-9_]+$/'),
 			array('phone', 'length', 'max'=>20),
 			array('first_name, last_name', 'length', 'max'=>255),
 			array('age', 'length', 'max'=>10),
