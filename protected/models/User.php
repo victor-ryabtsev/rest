@@ -133,4 +133,12 @@ class User extends CActiveRecord
 
 		return $data;
 	}
+
+	public static function userToArray(User $user)
+	{
+		$data = $user->attributes;
+
+
+		return $data;
+	}
 }

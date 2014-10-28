@@ -8,4 +8,13 @@ class UserController extends RestController {
 
 		$this->renderJson(User::usersToArray($users));
 	}
+
+	public function actionView($id) {
+		$user = User::model()->findByPk($id);
+		if (!$user) {
+			$this->sendErrors(array('User not found'));
+		}
+
+		$this->renderJson(User::userToArray($user));
+	}
 }

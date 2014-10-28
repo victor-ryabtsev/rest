@@ -41,6 +41,7 @@ return array(
 	  'showScriptName' => FALSE,
 	  'rules' => array(
 		array('api/user/list', 'pattern' => 'api/users', 'verb' => 'GET'),
+		array('api/user/view', 'pattern' => 'api/users/<id:\d+>', 'verb' => 'GET'),
 		'<controller:\w+>/<id:\d+>' => '<controller>/view',
 		'<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
 		'<controller:\w+>/<action:\w+>' => '<controller>/<action>',

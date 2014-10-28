@@ -32,4 +32,10 @@ class RestController extends CController
         JsonResponse::render($data, $code);
     }
 
+	public function sendErrors($errors, $code = 200) {
+		$this->layout = false;
+		$data = array('errors' => $errors);
+		JsonResponse::render($data, $code);
+	}
+
 }
