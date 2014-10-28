@@ -53,4 +53,17 @@ class UserController extends RestController {
 		$this->renderJson(User::userToArray($user));
 
 	}
+
+	public function actionDelete($id)
+	{
+		$user = User::model()->findByPk($id);
+		if (!$user) {
+			$this->sendErrors(array('User not found'));
+		}
+
+		$user->delete();
+
+		$this->renderJson(array());
+
+	}
 }
